@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 
 const PostForm = ({ onSubmit }) => {
@@ -12,20 +14,20 @@ const PostForm = ({ onSubmit }) => {
         setContent('')
     }
     return (
-        <form className='' onSubmit={handleSubmit}>
+        <form className='mx-auto text-left' onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="title">Title</label>
                 <input 
                 type='text'
                 id='title'
                 value={title}
-                className='border mx-2'
+                className='border mx-9'
                 onChange={e => setTitle(e.target.value)}
                 />
             </div>
             <div>
                 <label htmlFor="title">Content</label>
-                <input 
+                <textarea 
                 type='text'
                 id='content'
                 value={content}
