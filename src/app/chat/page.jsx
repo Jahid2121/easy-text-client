@@ -1,11 +1,10 @@
-import React from 'react';
 
-const CreatePage = () => {
+const ChatPage = () => {
     return (
         <div>
-            
+            Chat room
         </div>
     );
 };
 
-export default CreatePage;
+export default ChatPage;
