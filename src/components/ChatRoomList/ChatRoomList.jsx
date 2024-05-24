@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-const ChatRoomList = ({rooms}) => {
+const ChatRoomList = ({rooms, userName}) => {
     return (
         <div>
         {rooms?.length > 0 ? (

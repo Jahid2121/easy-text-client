@@ -1,12 +1,15 @@
 "use client"
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosPubic from '../../../hooks/useAxiosPublic';
+
 
 const RoomsDetailsPage = ({params}) => {
   const axiosPublic = useAxiosPubic()
   const id = params.id
-console.log(id);
+// console.log(id);
+const [newMessage, setNewMessage] = useState('');
+  console.log(newMessage);
 
   
   
@@ -16,6 +19,7 @@ console.log(id);
     isLoading,
     isError,
     error,
+    refetch
   } = useQuery({
     queryKey: ["messages", id],
     queryFn: async () => {
@@ -32,9 +36,23 @@ console.log(id);
     console.log(error);
   }
 
-    const handleSendMessage = (message) => {
-        console.log('Message sent');
+  const handleSendMessage = async () => {
+    try {
+      await axiosPublic.post(`/rooms/${id}/messages`, {
+        userName: 'Default', 
+        message: newMessage
+      });
+      console.log('Message sent');
+      setNewMessage('');
+      refetch();
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
+  };
+
+  const handleMessageChange = (event) => {
+    setNewMessage(event.target.value);
+  };
     
     
     return (
@@ -58,11 +76,16 @@ console.log(id);
       <div className="flex space-x-4">
         <input
           type="text"
+          name="message"
+          value={newMessage}
+          onChange={handleMessageChange}
           className="flex-grow input input-bordered"
           placeholder="Type your message here..."
-
         />
-        <button className="btn bg-green-500 hover:bg-green-700" onClick={handleSendMessage}>
+        <button
+          className="btn bg-green-500 hover:bg-green-700"
+          onClick={handleSendMessage}
+        >
           Send
         </button>
       </div>

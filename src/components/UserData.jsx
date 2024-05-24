@@ -8,14 +8,17 @@ import Swal from "sweetalert2";
 import useAxiosPubic from "../hooks/useAxiosPublic";
 import { redirect } from "next/navigation";
 
-const UserData = () => {
+
+const UserData = ({setName}) => {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
+
+
+  
   const axiosPublic = useAxiosPubic()
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value
-    console.log(name); 
+    setName(name); 
     try {
         await axiosPublic.post("/users", {name })
         await   Swal.fire({
@@ -24,20 +27,25 @@ const UserData = () => {
             icon: 'success',
             confirmButtonText: 'OK',
           })
+         
+
           
         
     } catch (error) {
         console.log(error.message);
     }
-    await redirect('/chat'); 
  
 
 
   };
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
  
 
   return (
-    <div className="hero  min-h-screen  ">
+    <div className="hero ">
       <div className="max-w-7xl mx-auto  md:flex justify-center">
         <div className="hidden md:block">
      
@@ -51,12 +59,13 @@ const UserData = () => {
               <h1 className="text-5xl font-bold">User Data</h1>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text dark:text-white">Name</span>
+                  <span className="label-text dark:text-white">Enter Your Name</span>
                 </label>
                 <input
                   type="text"
                   name="name"
                   id="name"
+                  onChange={handleNameChange}
                   required={true}
                   className="input  input-bordered rounded-none"
                   value={formData.name}
