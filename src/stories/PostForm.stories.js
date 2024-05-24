@@ -1,4 +1,4 @@
-import PostForm from '@/components/PostForm/PostForm';
+import PostForm from '../components/PostForm/PostForm.jsx';
 import React from 'react';
 
 // Define metadata for the PostForm component story
