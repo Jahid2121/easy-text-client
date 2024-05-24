@@ -1,7 +1,36 @@
 "use client"
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import useAxiosPubic from '../../../hooks/useAxiosPublic';
 
-const roomsDetailsPage = ({params}) => {
+const RoomsDetailsPage = ({params}) => {
+  const axiosPublic = useAxiosPubic()
+  const id = params.id
+console.log(id);
+
+  
+  
+
+  const {
+    data: messages = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["messages", id],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/rooms/${id}/messages`);
+      return res.data.data;
+      // console.log(res.data);
+    },
+  });
+
+  if (isLoading) {
+    return <div className="w-1/2 flex mx-auto loading "></div>
+  }
+  if (isError) {
+    console.log(error);
+  }
 
     const handleSendMessage = (message) => {
         console.log('Message sent');
@@ -10,35 +39,20 @@ const roomsDetailsPage = ({params}) => {
     
     return (
         <div className="max-w-4xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg">
-      <h1 className="text-4xl font-bold text-center mb-6">Chat Room {params.id}</h1>
+      <h1 className="text-4xl font-bold text-center mb-6">Chat Room</h1>
       
       <div className="mb-6">
-        {/* {messages.length > 0 ? (
-          <ul className="space-y-4">
-            {messages.map((message, index) => (
-              <li key={index} className="bg-base-100 p-4 rounded-lg">
-                {message}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-center text-gray-500 text-lg">No messages yet.</p>
-        )} */}
-
-<ul className="space-y-4">
-              <li className="bg-base-100 p-4 rounded-lg">
-                Hi there
-              </li>
-              <li className="bg-base-100 p-4 rounded-lg">
-                How are you doing ?
-              </li>
-              <li className="bg-base-100 p-4 rounded-lg">
-                Hi there
-              </li>
-              <li className="bg-base-100 p-4 rounded-lg">
-                Fine
-              </li>
-          </ul>
+        {messages.map((msg) => (
+          <div key={msg.id} className="bg-base-100 p-4 rounded-lg mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-semibold">{msg.messagesender}</span>
+              <span className="text-sm text-gray-500">
+                {new Date(msg.created_at).toLocaleString()}
+              </span>
+            </div>
+            <div className="text-base">{msg.content}</div>
+          </div>
+        ))}
       </div>
       
       <div className="flex space-x-4">
@@ -56,4 +70,4 @@ const roomsDetailsPage = ({params}) => {
         );
     };
 
-export default roomsDetailsPage;
+export default RoomsDetailsPage;

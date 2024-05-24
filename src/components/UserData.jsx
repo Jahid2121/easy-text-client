@@ -23,13 +23,13 @@ const UserData = () => {
             text: 'You have been successfully registered.',
             icon: 'success',
             confirmButtonText: 'OK',
-          }).then(() => {
-            redirect('/chat'); 
-          });
+          })
+          
         
     } catch (error) {
         console.log(error.message);
     }
+    await redirect('/chat'); 
  
 
 
