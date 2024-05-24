@@ -3,15 +3,15 @@ import useAxiosPubic from './useAxiosPublic';
 
 const useChatRooms = () => {
     const axiosPublic = useAxiosPubic();
-    const { data: rooms = [] } = useQuery({
-        queryKey: ['rooms'],
+    const { data: chatRooms = [] } = useQuery({
+        queryKey: ['chatRooms'],
         queryFn: async () => {
-            const res = await axiosPublic.get("/api/chat")
+            const res = await axiosPublic.get("/rooms")
             const data = await res.data;
             return data;
         }
     })
-    return [rooms]
+    return [chatRooms]
 };
 
 export default useChatRooms;

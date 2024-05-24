@@ -4,20 +4,24 @@ import Link from 'next/link';
 import useChatRooms from '../../hooks/useChatRooms';
 
 const ChatRoomPage = () => {
-    const [rooms] = useChatRooms()
+    const [chatRooms] = useChatRooms()
+    const rooms = chatRooms.data 
     console.log(rooms);
     
 
     return (
-        <div>
-            <h1>Chat Room List Page</h1>
+        <div className='max-w-7xl mx-auto p-6 bg-base-200 rounded-lg shadow-lg'>
+            <h1 className='text-4xl font-bold text-center mb-6'>Chat Room List Page</h1>
             <div>
                 {rooms?.length > 0 ? (
-                    <ul>
+                    <ul className='space-y-4'>
                         {rooms.map(room => (
-                            <li key={room?.id}>
+                            <li key={room?.id} className='bg-base-100 p-4 rounded-lg hover:bg-green-500 hover:text-white transition'>
                                 <Link href={`/chat/${room?.id}`}>
-                                   {room?.chatName}
+                                   <h2>
+                                   {room?.name}
+                                   </h2>
+                                   <p>{room?.description}</p>
                                 </Link>
                             </li>
                         ))}
