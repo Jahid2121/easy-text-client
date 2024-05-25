@@ -18,7 +18,7 @@ const UserData = ({ setName }) => {
     localStorage.setItem('name', name);
 
     try {
-      await axiosPublic.post("/users", { name });
+      // await axiosPublic.post("/users", { name });
       await Swal.fire({
         title: "Success!",
         text: "You have been successfully registered.",

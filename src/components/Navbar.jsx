@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from "next/link";
+import chatImg  from "../../public/images/chat.png"
 const Navbar = () => {
     return (
         <div>
@@ -17,7 +18,7 @@ const Navbar = () => {
     width="48"
     height="48"
     className=""
-    src="/images/chat.png"
+    src={chatImg}
     />
     <h2 className="
   
