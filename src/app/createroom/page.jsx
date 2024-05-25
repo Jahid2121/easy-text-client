@@ -4,19 +4,19 @@ import React, { useState } from 'react';
 import useAxiosPubic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 
-const PostForm = ({ onSubmit }) => {
-    const [title, setTitle] = useState('');
+const CreateRoomPage = () => {
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const axiosPublic = useAxiosPubic()
 
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(title, content);
+        console.log(name, description);
         try {
-            await axiosPublic.post("/blogs", {title, description})
+            await axiosPublic.post("/rooms", {name, description})
             await   Swal.fire({
                 title: 'Success!',
-                text: 'You have been successfully registered.',
+                text: 'You have been successfully Create new room.',
                 icon: 'success',
                 confirmButtonText: 'OK',
               })
@@ -28,24 +28,55 @@ const PostForm = ({ onSubmit }) => {
             console.log(error.message);
         }
 
-        setTitle('');
+        setName('');
         setDescription('');
     };
 
     return (
-        <form className="mx-auto text-left space-y-6" onSubmit={handleSubmit}>
+
+        <div className="
+        flex 
+        min-h-screen 
+        flex-col 
+        justify-center 
+        items-center 
+        py-12 
+        bg-gray-100
+    ">
+        <div className="w-full max-w-md px-6">
+            <h2 className="
+                mt-6 
+                text-center 
+                text-4xl 
+                font-extrabold 
+                text-gray-900
+            ">
+                Create New Room
+            </h2>
+
+        </div>
+        <div className="
+            mt-8 
+            w-full 
+            max-w-md 
+            bg-white 
+            p-8 
+            rounded-lg 
+            shadow-md
+        ">
+              <form className="mx-auto text-left space-y-6" onSubmit={handleSubmit}>
             <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">Room Name</label>
                 <input
                     type="text"
                     id="title"
-                    value={title}
+                    value={name}
                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={e => setName(e.target.value)}
                 />
             </div>
             <div>
-                <label htmlFor="content" className="block text-sm font-medium text-gray-700">Content</label>
+                <label htmlFor="content" className="block text-sm font-medium text-gray-700">Short description</label>
                 <textarea
                     id="content"
                     value={description}
@@ -62,7 +93,10 @@ const PostForm = ({ onSubmit }) => {
                 </button>
             </div>
         </form>
+        </div>
+    </div>
+      
     );
 };
 
-export default PostForm;
+export default CreateRoomPage;

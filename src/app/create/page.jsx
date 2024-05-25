@@ -2,6 +2,8 @@ import PostForm from '../../components/PostForm/PostForm';
 import React from 'react';
 
 const CreatePostPage = () => {
+
+    
     return (
         <div className="
             flex 

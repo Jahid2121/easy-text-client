@@ -6,6 +6,8 @@ import useAxiosPubic from '../../../hooks/useAxiosPublic';
 
 const RoomsDetailsPage = ({params}) => {
   const axiosPublic = useAxiosPubic()
+  const name = localStorage.getItem('name')
+  console.log(name);
   const id = params.id
 // console.log(id);
 const [newMessage, setNewMessage] = useState('');
@@ -39,7 +41,7 @@ const [newMessage, setNewMessage] = useState('');
   const handleSendMessage = async () => {
     try {
       await axiosPublic.post(`/rooms/${id}/messages`, {
-        userName: 'Default', 
+        userName: name, 
         message: newMessage
       });
       console.log('Message sent');
