@@ -1,10 +1,9 @@
-import UserData from "../components/UserData"
-
+import ShowAllBlogs from "../components/ShowAllBlogs"
 
 export default function Home() {
   return (
   <div>
-{/* <UserData /> */}
+    <ShowAllBlogs />
   </div>
   );
 }

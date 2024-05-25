@@ -5,36 +5,40 @@ const Navbar = () => {
     return (
         <div>
              <div className="
-   flex 
-   min-h-full 
-   flex-col 
-   py-12
+    flex justify-between items-center
+   py-1
    sm:px-6 
-   lg:px-8
    bg-gray-100
    ">
-    <div className="sm:mx-auto sm:w-full sm:max-w-md">
-    <Image
+
+    <div className='flex my-4'>
+   <Image
     alt="logo"
     width="48"
     height="48"
-    className="mx-auto w-auto"
+    className=""
     src="/images/chat.png"
     />
     <h2 className="
-    mt-6 
-    text-center
+  
+    
     text-3xl 
     font-bold
     tracking-tight
     ">
     Easy Text
     </h2>
-    </div>
+   </div>
+   <div >
+   <Link href="/create" ><button className="btn mr-5 text-white btn-success">Create Post</button></Link>
 
-    
+<Link href="chat" ><button className="btn  mr-5 text-white btn-success">Chat Lists</button></Link>
 
-    <Link href="chat" ><button className="btn text-white btn-success">Chat Lists</button></Link>
+<Link href="chat" ><button className="btn  mr-5 text-white btn-success">Chat Lists</button></Link>
+   </div>
+   
+
+
    </div>
         </div>
     );
